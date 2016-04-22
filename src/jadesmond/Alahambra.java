@@ -62,7 +62,7 @@ public class Alahambra extends Solitaire {
 		initializeView();
 		intializeControllers();
 
-		AlahambraGameStarter start = new AlahambraGameStarter(this);
+		AlahambraDealer start = new AlahambraGameStarter(this);
 		start.dealCards();
 	}
 

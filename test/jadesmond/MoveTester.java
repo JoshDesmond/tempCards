@@ -7,18 +7,18 @@ import ks.launcher.Main;
 
 public class MoveTester {
 
-    private Random random = new Random();
+	private Random random = new Random();
 
-    /**
-     * Creates a new Alahambra with a window for testing.
-     * 
-     * @return
-     */
-    public Alahambra getTestGame() {
-        Alahambra testGame = new Alahambra();
-        int r = random.nextInt();
-        GameWindow gw = Main.generateWindow(testGame, r);
-        return testGame;
-    }
+	/**
+	 * Creates a new Alahambra with a window for testing.
+	 * 
+	 * @return
+	 */
+	public Alahambra getTestGame() {
+		Alahambra testGame = new Alahambra();
+		int r = random.nextInt();
+		GameWindow gw = Main.generateWindow(testGame, r);
+		return testGame;
+	}
 
 }
