@@ -53,7 +53,7 @@ public class Alahambra extends Solitaire {
 
     @Override
     public boolean hasWon() {
-        return false;
+        return getScore().getValue() == 96;
     }
 
     @Override

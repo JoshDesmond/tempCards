@@ -32,6 +32,7 @@ public class CardToFoundationMoveTest {
         CardToKingFoundationMove move2 = new CardToKingFoundationMove(
                 game.columns[1], game.kingFoundations[0], new Card(12, 1));
         assertTrue(move2.valid(game));
+
         assertTrue(move2.doMove(game));
 
         assertEquals(game.kingFoundations[0].peek(), new Card(12, 1));
@@ -78,6 +79,23 @@ public class CardToFoundationMoveTest {
         game.kingFoundations[0].removeAll();
         game.kingFoundations[0].add(new Card(kingValue, 1));
         return game;
+    }
+
+    @Test
+    public void testScoreUpdate() {
+
+        Alahambra game = getGame(1, 13);
+
+        CardToAceFoundationMove moveAce = new CardToAceFoundationMove(
+                game.columns[1], game.aceFoundations[0], new Card(2, 1));
+
+        int oldScore = game.getScoreValue();
+        moveAce.doMove(game);
+        assertTrue(game.getScoreValue() == oldScore + 1);
+
+        moveAce.undo(game);
+
+        assertTrue(game.getScoreValue() == oldScore);
     }
 
 }

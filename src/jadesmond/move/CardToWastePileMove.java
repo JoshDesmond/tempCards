@@ -37,7 +37,7 @@ public class CardToWastePileMove extends Move {
 
     @Override
     public boolean valid(Solitaire game) {
-        if (source.empty())
+        if (wastePile.empty())
             return false;
         // Card has to be one value higher or lower and of the same suit.
         Card wasteCard = wastePile.peek();

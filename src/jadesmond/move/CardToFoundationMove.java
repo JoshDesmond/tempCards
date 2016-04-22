@@ -29,12 +29,15 @@ public abstract class CardToFoundationMove extends Move {
         }
 
         target.add(card);
+        game.updateScore(1);
+
         return true;
     }
 
     @Override
     public boolean undo(Solitaire game) {
         source.add(target.get());
+        game.updateScore(-1);
         return true;
     }
 

@@ -82,4 +82,15 @@ public class CardToWastePileMoveTest {
         assertTrue(!move2.valid(game));
     }
 
+    @Test
+    public void testEmptyWastePile() {
+        Alahambra game = test.getTestGame();
+
+        CardToWastePileMove move = new CardToWastePileMove(game.wastePile,
+                game.columns[3], new Card(3, 3));
+
+        assertTrue(!move.valid(game));
+        assertTrue(!move.doMove(game));
+    }
+
 }
