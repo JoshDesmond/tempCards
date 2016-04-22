@@ -37,7 +37,6 @@ public class ResetStockPileMove extends Move {
 			stockPile.add(c);
 		}
 
-		assert game instanceof Alahambra;
 		((Alahambra) game).updateStock(-1);
 
 		return true;
@@ -51,7 +50,6 @@ public class ResetStockPileMove extends Move {
 			wastePile.add(c);
 		}
 
-		assert game instanceof Alahambra;
 		((Alahambra) game).updateStock(1);
 
 		return true;
@@ -62,13 +60,7 @@ public class ResetStockPileMove extends Move {
 		if (!stockPile.empty()) {
 			return false;
 		}
-		assert game instanceof Alahambra;
-		if (((Alahambra) game).getStocksLeft().getValue() <= 0) {
-			return false;
-		}
+		return (((Alahambra) game).getStocksLeft().getValue() > 0);
 
-		else
-			return true;
 	}
-
 }

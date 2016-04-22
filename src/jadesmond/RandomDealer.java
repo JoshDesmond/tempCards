@@ -10,7 +10,7 @@ import ks.common.model.Card;
  * This class is in charge of dealing out the cards to the correct spots at the
  * start of a game
  */
-public class RandomDealer implements AlahambraDealer{
+public class RandomDealer implements AlahambraDealer {
 
 	Random random = new Random();
 	private Alahambra game;
@@ -97,51 +97,5 @@ public class RandomDealer implements AlahambraDealer{
 		game.kingFoundations[i - 4].add(card);
 		return true;
 
-	}
-
-	/**
-	 * Adds the given card to the lowest index Ace Foundation pile.
-	 * 
-	 * @return true if that was the last ace needed for initializing the deck.
-	 */
-	private boolean addAceToFoundation(Card c) {
-		assert c.getRank() == 1;
-
-		for (int i = 0; i < 4; i++) {
-			if (game.aceFoundations[i].peek() == null) {
-				game.aceFoundations[i].add(c);
-
-				if (i == 3) {
-					return true;
-				} else
-					return false;
-			}
-		}
-
-		throw new IllegalStateException(
-				"Somehow exited a loop when not quite possible.");
-	}
-
-	/**
-	 * Adds the given card to the lowest index Ace Foundation pile.
-	 * 
-	 * @return true if that was the last ace needed for initializing the deck.
-	 */
-	private boolean addKingToFoundation(Card c) {
-		assert c.getRank() == 13;
-
-		for (int i = 0; i < 4; i++) {
-			if (game.kingFoundations[i].peek() == null) {
-				game.kingFoundations[i].add(c);
-
-				if (i == 3) {
-					return true;
-				} else
-					return false;
-			}
-		}
-
-		throw new IllegalStateException(
-				"Somehow exited a loop when not quite possible.");
 	}
 }

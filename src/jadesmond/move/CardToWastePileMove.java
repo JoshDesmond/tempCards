@@ -8,55 +8,52 @@ import ks.common.model.Pile;
 
 public class CardToWastePileMove extends Move {
 
-    Pile wastePile;
-    Column source;
-    Card card;
+	Pile wastePile;
+	Column source;
+	Card card;
 
-    public CardToWastePileMove(Pile wastePile, Column source, Card card) {
-        super();
-        this.wastePile = wastePile;
-        this.source = source;
-        this.card = card;
-    }
+	public CardToWastePileMove(Pile wastePile, Column source, Card card) {
+		super();
+		this.wastePile = wastePile;
+		this.source = source;
+		this.card = card;
+	}
 
-    @Override
-    public boolean doMove(Solitaire game) {
-        if (!valid(game)) {
-            return false;
-        }
+	@Override
+	public boolean doMove(Solitaire game) {
+		if (!valid(game)) {
+			return false;
+		}
 
-        wastePile.add(card);
-        return true;
-    }
+		wastePile.add(card);
+		return true;
+	}
 
-    @Override
-    public boolean undo(Solitaire game) {
-        source.add(wastePile.get());
-        return true;
-    }
+	@Override
+	public boolean undo(Solitaire game) {
+		source.add(wastePile.get());
+		return true;
+	}
 
-    @Override
-    public boolean valid(Solitaire game) {
-        if (wastePile.empty())
-            return false;
-        // Card has to be one value higher or lower and of the same suit.
-        Card wasteCard = wastePile.peek();
+	@Override
+	public boolean valid(Solitaire game) {
+		if (wastePile.empty())
+			return false;
+		// Card has to be one value higher or lower and of the same suit.
+		Card wasteCard = wastePile.peek();
 
-        if (!wasteCard.sameSuit(card)) {
-            return false;
-        }
+		if (!wasteCard.sameSuit(card)) {
+			return false;
+		}
 
-        if (Math.abs(wasteCard.compareTo(card)) == 1) {
-            return true;
-        }
+		if (Math.abs(wasteCard.compareTo(card)) == 1) {
+			return true;
+		}
 
-        if (wasteCard.isAce() & card.getRank() == 13) {
-            return true;
-        } else if (card.isAce() & wasteCard.getRank() == 13) {
-            return true;
-        }
+		if (wasteCard.isAce() & card.getRank() == 13) {
+			return true;
+		} // else
+		return (card.isAce() & wasteCard.getRank() == 13);
 
-        return false;
-    }
-
+	}
 }
