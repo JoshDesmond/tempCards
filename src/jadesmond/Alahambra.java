@@ -71,7 +71,6 @@ public class Alahambra extends Solitaire {
 
         stockPileView.setMouseAdapter(
                 new StockController(this, stockPile, wastePile));
-
     }
 
     private void initializeView() {
