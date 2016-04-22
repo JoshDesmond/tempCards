@@ -24,7 +24,7 @@ public class Alahambra extends Solitaire {
      * Starts at 2. If it's 0, the waste cannot be flipped back over onto the
      * stock.
      */
-    int numberOfStocksRemaining;
+    MutableInteger numberOfStocksRemaining;
 
     MultiDeck deck;
     Pile wastePile;
@@ -176,11 +176,11 @@ public class Alahambra extends Solitaire {
     }
 
     private MutableInteger getStocksLeft() {
-        // TODO
-        return new MutableInteger(2);
+        return numberOfStocksRemaining;
     }
 
     private void initializeModel(int seed) {
+        numberOfStocksRemaining = new MutableInteger(2);
         deck = new MultiDeck("deck", 2);
         deck.create(seed);
         model.addElement(deck);
@@ -227,12 +227,14 @@ public class Alahambra extends Solitaire {
      * 
      * @return True if there are zero stocks remaining after decreasing by one.
      */
-    boolean decreaseStock() {
-        this.numberOfStocksRemaining--;
-        if (numberOfStocksRemaining == 0) {
-            return true;
+    boolean updateStock(int delta) {
+        this.numberOfStocksRemaining.increment(delta);
+        int s = getStocksLeft().getValue();
+        if (s < 0) {
+            throw new IllegalStateException("Stocks shouldn't be below zero");
         }
-        return false;
+        return (s == 0);
+
     }
 
     public static void main(String[] args) {
