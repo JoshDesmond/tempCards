@@ -73,7 +73,7 @@ public class Alahambra extends Solitaire {
         stockPileView.setMouseAdapter(
                 new StockController(this, stockPile, wastePile));
         wastePileView
-                .setMouseAdapter(new WastePileController(this, stockPileView));
+                .setMouseAdapter(new WastePileController(this, wastePileView));
 
         for (int i = 0; i < 8; i++) {
             columnViews[i].setMouseAdapter(

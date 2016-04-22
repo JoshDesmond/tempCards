@@ -1,4 +1,4 @@
-package jadesmond;
+package jadesmond.move;
 
 import ks.common.games.Solitaire;
 import ks.common.model.Card;
@@ -6,7 +6,7 @@ import ks.common.model.Move;
 import ks.common.model.Pile;
 import ks.common.model.Stack;
 
-public class CardToFoundation extends Move {
+public class CardToFoundationMove extends Move {
 
     Stack source;
     Pile target;

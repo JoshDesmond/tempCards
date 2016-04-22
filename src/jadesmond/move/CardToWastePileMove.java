@@ -1,4 +1,4 @@
-package jadesmond;
+package jadesmond.move;
 
 import ks.common.games.Solitaire;
 import ks.common.model.Card;
@@ -25,21 +25,20 @@ public class CardToWastePileMove extends Move {
             return false;
         }
 
-        Card card = source.get();
         wastePile.add(card);
         return true;
     }
 
     @Override
     public boolean undo(Solitaire game) {
-        Card c = wastePile.get();
-        source.add(c);
+        source.add(wastePile.get());
         return true;
     }
 
     @Override
     public boolean valid(Solitaire game) {
-        // TODO
+        if (source.empty())
+            return false;
         return true;
     }
 

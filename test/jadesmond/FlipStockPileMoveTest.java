@@ -5,6 +5,8 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import jadesmond.Alahambra;
+import jadesmond.move.FlipStockPileMove;
 import ks.client.gamefactory.GameWindow;
 import ks.common.model.Card;
 import ks.launcher.Main;

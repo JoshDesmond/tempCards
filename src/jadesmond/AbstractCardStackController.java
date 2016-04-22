@@ -3,10 +3,18 @@ package jadesmond;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import ks.common.model.Card;
+import ks.common.model.Stack;
 import ks.common.view.CardView;
 import ks.common.view.Container;
 import ks.common.view.Widget;
 
+/**
+ * This is the super class for controlling mouse events which come from either
+ * the wastePile or the eight columns.
+ * 
+ * @author Josh Desmond
+ */
 public abstract class AbstractCardStackController extends MouseAdapter {
 
     /** The game that we are partly controlling. */
@@ -85,14 +93,19 @@ public abstract class AbstractCardStackController extends MouseAdapter {
             return;
         }
 
+        if (fromWidget == source) {
+            Stack s = (Stack) source.getModelElement();
+            s.add((Card) activeDraggingObject.getModelElement());
+        }
+
         handleReleaseLogic(fromWidget, activeDraggingObject, me);
 
         // release the dragging object, (container will reset dragSource)
         c.releaseDraggingObject();
-        fromWidget.returnWidget(activeDraggingObject);
         c.repaint();
     }
 
+    /** Gets the CardView associated with the mouse event */
     protected abstract CardView getCard(MouseEvent me);
 
     /** Return true if there is a card there */

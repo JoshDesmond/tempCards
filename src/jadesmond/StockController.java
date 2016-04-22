@@ -1,5 +1,6 @@
 package jadesmond;
 
+import jadesmond.move.FlipStockPileMove;
 import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.model.Move;
 import ks.common.model.Pile;

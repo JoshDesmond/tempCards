@@ -1,4 +1,4 @@
-package jadesmond;
+package jadesmond.move;
 
 import ks.common.games.Solitaire;
 import ks.common.model.Card;

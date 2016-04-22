@@ -31,8 +31,6 @@ public class ColumnController extends AbstractCardStackController {
     @Override
     protected void handleReleaseLogic(Widget fromWidget,
             Widget activeDraggingObject, MouseEvent me) {
-        // Do Nothing?
-
     }
 
 }
