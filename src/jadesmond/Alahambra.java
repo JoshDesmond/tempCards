@@ -66,6 +66,7 @@ public class Alahambra extends Solitaire {
 
     private void intializeControllers() {
         for (Widget w : views) {
+            w.setMouseAdapter(new SolitaireReleasedAdapter(this));
             w.setUndoAdapter(new SolitaireUndoAdapter(this));
             w.setMouseMotionAdapter(new SolitaireMouseMotionAdapter(this));
         }

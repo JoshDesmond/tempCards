@@ -23,6 +23,10 @@ public class FlipStockPileMove extends Move {
      *            Waste Pile where the card is being placed to.
      */
     public FlipStockPileMove(Pile stockPile, Pile wastePile) {
+        if (stockPile == null || wastePile == null) {
+            throw new IllegalArgumentException("Null Pile was given");
+        }
+
         this.stockPile = stockPile;
         this.wastePile = wastePile;
     }

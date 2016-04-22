@@ -39,6 +39,17 @@ public class CardToWastePileMove extends Move {
     public boolean valid(Solitaire game) {
         if (source.empty())
             return false;
+        // Card has to be one value higher or lower and of the same suit.
+        Card wasteCard = wastePile.peek();
+
+        if (!wasteCard.sameSuit(card)) {
+            return false;
+        }
+
+        if (Math.abs(wasteCard.compareTo(card)) != 1) {
+            return false;
+        }
+
         return true;
     }
 
