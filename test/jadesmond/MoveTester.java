@@ -7,7 +7,7 @@ import ks.launcher.Main;
 
 public class MoveTester {
 
-    Random random = new Random();
+    private Random random = new Random();
 
     /**
      * Creates a new Alahambra with a window for testing.

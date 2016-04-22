@@ -46,11 +46,17 @@ public class CardToWastePileMove extends Move {
             return false;
         }
 
-        if (Math.abs(wasteCard.compareTo(card)) != 1) {
-            return false;
+        if (Math.abs(wasteCard.compareTo(card)) == 1) {
+            return true;
         }
 
-        return true;
+        if (wasteCard.isAce() & card.getRank() == 13) {
+            return true;
+        } else if (card.isAce() & wasteCard.getRank() == 13) {
+            return true;
+        }
+
+        return false;
     }
 
 }
