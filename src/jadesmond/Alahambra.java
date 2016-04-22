@@ -84,6 +84,7 @@ public class Alahambra extends Solitaire {
 		initializeView();
 		intializeControllers();
 
+		this.updateNumberCardsLeft(96);
 		dealer.dealCards(this);
 	}
 
