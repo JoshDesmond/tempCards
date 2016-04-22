@@ -3,7 +3,9 @@ package jadesmond;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import jadesmond.move.CardToAceFoundationMove;
 import jadesmond.move.CardToFoundationMove;
+import jadesmond.move.CardToKingFoundationMove;
 import ks.common.model.Card;
 import ks.common.model.Pile;
 import ks.common.model.Stack;
@@ -16,8 +18,10 @@ public class FoundationController extends MouseAdapter {
 
     protected Alahambra theGame;
     protected PileView foundationSource;
+    private boolean isAceType;
 
-    public FoundationController(Alahambra theGame, PileView foundationSource) {
+    public FoundationController(Alahambra theGame, PileView foundationSource,
+            boolean isAceType) {
         super();
         this.theGame = theGame;
         this.foundationSource = foundationSource;
@@ -63,8 +67,12 @@ public class FoundationController extends MouseAdapter {
         final Stack stack = (Stack) fromWidget.getModelElement();
         Pile foundationPile = (Pile) foundationSource.getModelElement();
 
-        CardToFoundationMove move = new CardToFoundationMove(stack,
-                foundationPile, card);
+        CardToFoundationMove move;
+        if (this.isAceType == true) {
+            move = new CardToAceFoundationMove(stack, foundationPile, card);
+        } else {
+            move = new CardToKingFoundationMove(stack, foundationPile, card);
+        }
 
         if (move.valid(theGame)) {
             move.doMove(theGame);

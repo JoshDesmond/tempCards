@@ -1,4 +1,4 @@
-package jadesmond;
+package jadesmond.move;
 
 import ks.common.games.Solitaire;
 import ks.common.model.Move;
@@ -9,6 +9,7 @@ public class ResetStockPileMove extends Move {
 
     Pile stockPile;
     Pile wastePile;
+    // FIXME unsure about this one?
     MutableInteger stocksRemaining;
 
     @Override

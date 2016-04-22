@@ -6,7 +6,7 @@ import ks.common.model.Move;
 import ks.common.model.Pile;
 import ks.common.model.Stack;
 
-public class CardToFoundationMove extends Move {
+public abstract class CardToFoundationMove extends Move {
 
     Stack source;
     Pile target;
@@ -14,6 +14,9 @@ public class CardToFoundationMove extends Move {
 
     public CardToFoundationMove(Stack source, Pile target, Card card) {
         super();
+        if (source == null || target == null || card == null) {
+            throw new IllegalArgumentException("Can't pass null parameters");
+        }
         this.source = source;
         this.target = target;
         this.card = card;
@@ -36,11 +39,6 @@ public class CardToFoundationMove extends Move {
     }
 
     @Override
-    public boolean valid(Solitaire game) {
-        if (source.empty()) {
-            return false;
-        }
-        return true;
-    }
+    public abstract boolean valid(Solitaire game);
 
 }

@@ -7,7 +7,6 @@ import ks.common.controller.SolitaireMouseMotionAdapter;
 import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.games.Solitaire;
 import ks.common.games.SolitaireUndoAdapter;
-import ks.common.model.Card;
 import ks.common.model.Column;
 import ks.common.model.MultiDeck;
 import ks.common.model.MutableInteger;
@@ -62,6 +61,9 @@ public class Alahambra extends Solitaire {
         initializeModel(getSeed());
         initializeView();
         intializeControllers();
+
+        AlahambraGameStarter start = new AlahambraGameStarter(this);
+        start.dealCards();
     }
 
     private void intializeControllers() {
@@ -180,7 +182,7 @@ public class Alahambra extends Solitaire {
 
     private void initializeModel(int seed) {
         deck = new MultiDeck("deck", 2);
-        deck.create(500);
+        deck.create(seed);
         model.addElement(deck);
 
         wastePile = new Pile("waste");
@@ -203,28 +205,21 @@ public class Alahambra extends Solitaire {
             initializeColumn(i);
         }
 
-        while (!deck.empty()) {
-            stockPile.add(deck.get());
-        }
     }
 
     private void initializeColumn(int i) {
         columns[i] = new Column(Integer.toString(i));
-        columns[i].add(deck.get());
-        columns[i].add(deck.get());
-        columns[i].add(deck.get());
-        columns[i].add(deck.get());
+        model.addElement(columns[i]);
     }
 
     private void initializeKingFoundation(int i) {
         kingFoundations[i] = new Pile();
-        kingFoundations[i].add(deck.get());
+        model.addElement(kingFoundations[i]);
     }
 
     private void initializeAceFoundation(int i) {
         aceFoundations[i] = new Pile();
-        Card c = deck.get();
-        aceFoundations[i].add(c);
+        model.addElement(aceFoundations[i]);
     }
 
     /**
