@@ -80,6 +80,11 @@ public class Alahambra extends Solitaire {
                     new ColumnController(this, columnViews[i]));
         }
 
+        for (int i = 0; i < 8; i++) {
+            foundationViews[i].setMouseAdapter(
+                    new FoundationController(this, foundationViews[i]));
+        }
+
         // Finally, cover the Container for any events not handled by a widget:
         getContainer()
                 .setMouseMotionAdapter(new SolitaireMouseMotionAdapter(this));

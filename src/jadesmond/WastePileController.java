@@ -6,6 +6,7 @@ import jadesmond.move.CardToWastePileMove;
 import ks.common.model.Card;
 import ks.common.model.Column;
 import ks.common.model.Pile;
+import ks.common.model.Stack;
 import ks.common.view.CardView;
 import ks.common.view.ColumnView;
 import ks.common.view.PileView;
@@ -50,7 +51,8 @@ public class WastePileController extends AbstractCardStackController {
         // are both the waste pile.
         if (fromWidget instanceof PileView) {
             System.out.println("Pile to Pile empty move");
-            pile.add(card);
+            Stack s = (Stack) fromWidget.getModelElement();
+            s.add((Card) activeDraggingObject.getModelElement());
         }
 
         // If the fromWidget is a ColumnView then make a move.

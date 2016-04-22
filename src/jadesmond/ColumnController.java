@@ -2,7 +2,9 @@ package jadesmond;
 
 import java.awt.event.MouseEvent;
 
+import ks.common.model.Card;
 import ks.common.model.Column;
+import ks.common.model.Stack;
 import ks.common.view.CardView;
 import ks.common.view.ColumnView;
 import ks.common.view.Widget;
@@ -31,6 +33,8 @@ public class ColumnController extends AbstractCardStackController {
     @Override
     protected void handleReleaseLogic(Widget fromWidget,
             Widget activeDraggingObject, MouseEvent me) {
+        Stack s = (Stack) fromWidget.getModelElement();
+        s.add((Card) activeDraggingObject.getModelElement());
     }
 
 }

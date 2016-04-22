@@ -12,27 +12,34 @@ public class CardToFoundationMove extends Move {
     Pile target;
     Card card;
 
+    public CardToFoundationMove(Stack source, Pile target, Card card) {
+        super();
+        this.source = source;
+        this.target = target;
+        this.card = card;
+    }
+
     @Override
     public boolean doMove(Solitaire game) {
         if (!valid(game)) {
             return false;
         }
 
-        Card card = source.get();
         target.add(card);
         return true;
     }
 
     @Override
     public boolean undo(Solitaire game) {
-        Card c = target.get();
-        source.add(c);
+        source.add(target.get());
         return true;
     }
 
     @Override
     public boolean valid(Solitaire game) {
-        // TODO
+        if (source.empty()) {
+            return false;
+        }
         return true;
     }
 

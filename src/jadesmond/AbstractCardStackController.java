@@ -14,6 +14,8 @@ import ks.common.view.Widget;
  * the wastePile or the eight columns.
  * 
  * @author Josh Desmond
+ * @author Heineman (Much of this was borrowed from Klondike's Buildable Pile
+ *         Controller)
  */
 public abstract class AbstractCardStackController extends MouseAdapter {
 
@@ -54,6 +56,10 @@ public abstract class AbstractCardStackController extends MouseAdapter {
         // the user clicked.
         c.setActiveDraggingObject(cardView, me);
 
+        // Make sure that the source doesn't have this card.
+        assert (!((Card) cardView.getModelElement())
+                .equals(((Stack) source.getModelElement()).peek()));
+
         // Tell container which BuildablePileView is the source for this drag
         // event.
         c.setDragSource(source);
@@ -91,11 +97,6 @@ public abstract class AbstractCardStackController extends MouseAdapter {
                     "BuildablePileController::mouseReleased(): somehow no dragSource in container.");
             c.releaseDraggingObject();
             return;
-        }
-
-        if (fromWidget == source) {
-            Stack s = (Stack) source.getModelElement();
-            s.add((Card) activeDraggingObject.getModelElement());
         }
 
         handleReleaseLogic(fromWidget, activeDraggingObject, me);
