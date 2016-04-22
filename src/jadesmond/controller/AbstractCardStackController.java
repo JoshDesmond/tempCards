@@ -1,4 +1,6 @@
-package jadesmond;
+package jadesmond.controller;
+
+import jadesmond.Alahambra;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

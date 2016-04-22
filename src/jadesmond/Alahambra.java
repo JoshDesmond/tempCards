@@ -1,5 +1,10 @@
 package jadesmond;
 
+import jadesmond.controller.ColumnController;
+import jadesmond.controller.FoundationController;
+import jadesmond.controller.StockController;
+import jadesmond.controller.WastePileController;
+
 import java.util.LinkedList;
 import java.util.List;
 

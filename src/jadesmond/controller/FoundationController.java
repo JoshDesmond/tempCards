@@ -1,8 +1,9 @@
-package jadesmond;
+package jadesmond.controller;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import jadesmond.Alahambra;
 import jadesmond.move.CardToAceFoundationMove;
 import jadesmond.move.CardToFoundationMove;
 import jadesmond.move.CardToKingFoundationMove;
