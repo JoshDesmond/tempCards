@@ -46,6 +46,23 @@ public class Alahambra extends Solitaire {
 	 */
 	private List<Widget> views;
 
+	private AlahambraDealer dealer;
+
+	/** Optional constructor you can use to change the way the game starts */
+	public Alahambra(AlahambraDealer dealer) {
+		super();
+		if (dealer == null) {
+			throw new IllegalArgumentException(
+					"null dealer given to constructor");
+		}
+		this.dealer = dealer;
+	}
+
+	public Alahambra() {
+		super();
+		this.dealer = new RandomDealer();
+	}
+
 	@Override
 	public String getName() {
 		return "Desmond-Alahambra";
@@ -62,8 +79,7 @@ public class Alahambra extends Solitaire {
 		initializeView();
 		intializeControllers();
 
-		AlahambraDealer start = new AlahambraGameStarter(this);
-		start.dealCards();
+		dealer.dealCards(this);
 	}
 
 	private void intializeControllers() {

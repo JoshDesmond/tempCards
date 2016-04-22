@@ -1,85 +1,85 @@
 package jadesmond;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
+import static org.junit.Assert.*;
 import jadesmond.move.FlipStockPileMove;
 import ks.common.model.Card;
 
+import org.junit.Test;
+
 public class FlipStockPileMoveTest {
 
-    MoveTester tester = new MoveTester();
+	MoveTester tester = new MoveTester();
 
-    @Test
-    public void testIntegration() {
-        Alahambra testGame = tester.getTestGame();
+	@Test
+	public void testIntegration() {
+		Alahambra testGame = tester.getTestGame();
 
-        Card topCard = testGame.stockPile.peek();
-        FlipStockPileMove move = new FlipStockPileMove(testGame.stockPile,
-                testGame.wastePile);
-        assertTrue(move.valid(testGame));
+		Card topCard = testGame.stockPile.peek();
+		FlipStockPileMove move = new FlipStockPileMove(testGame.stockPile,
+				testGame.wastePile);
+		assertTrue(move.valid(testGame));
 
-        move.doMove(testGame);
-        assertTrue(testGame.wastePile.count() == 1);
+		move.doMove(testGame);
+		assertTrue(testGame.wastePile.count() == 1);
 
-        assertEquals(testGame.wastePile.peek(), topCard);
+		assertEquals(testGame.wastePile.peek(), topCard);
 
-        move.undo(testGame);
-        assertTrue(testGame.wastePile.count() == 0);
+		move.undo(testGame);
+		assertTrue(testGame.wastePile.count() == 0);
 
-        assertEquals(testGame.stockPile.peek(), topCard);
-    }
+		assertEquals(testGame.stockPile.peek(), topCard);
+	}
 
-    @Test
-    public void testInvalidFlip() {
-        Alahambra testGame = tester.getTestGame();
-        testGame.stockPile.removeAll();
-        FlipStockPileMove move = new FlipStockPileMove(testGame.stockPile,
-                testGame.wastePile);
+	@Test
+	public void testInvalidFlip() {
+		Alahambra testGame = tester.getTestGame();
+		testGame.stockPile.removeAll();
+		FlipStockPileMove move = new FlipStockPileMove(testGame.stockPile,
+				testGame.wastePile);
 
-        assertTrue(!move.valid(testGame));
-        assertTrue(!move.doMove(testGame));
-    }
+		assertTrue(!move.valid(testGame));
+		assertTrue(!move.doMove(testGame));
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testIllegalConstructor() {
-        FlipStockPileMove move = new FlipStockPileMove(null, null);
-    }
 
-    @Test
-    public void testFlipCard() {
-        Alahambra game = tester.getTestGame();
-        FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
-                game.wastePile);
-        move.doMove(game);
-        game.pushMove(move);
 
-        assertTrue(game.wastePile.peek().isFaceUp());
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalConstructor() {
+		FlipStockPileMove move = new FlipStockPileMove(null, null);
+	}
 
-        FlipStockPileMove move2 = new FlipStockPileMove(game.stockPile,
-                game.wastePile);
-        move2.doMove(game);
-        game.pushMove(move2);
+	@Test
+	public void testFlipCard() {
+		Alahambra game = tester.getTestGame();
+		FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
+				game.wastePile);
+		move.doMove(game);
+		game.pushMove(move);
 
-        assertTrue(game.wastePile.peek().isFaceUp());
+		assertTrue(game.wastePile.peek().isFaceUp());
 
-    }
+		FlipStockPileMove move2 = new FlipStockPileMove(game.stockPile,
+				game.wastePile);
+		move2.doMove(game);
+		game.pushMove(move2);
 
-    @Test
-    public void testUnflipCard() {
-        Alahambra game = tester.getTestGame();
-        FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
-                game.wastePile);
-        move.doMove(game);
-        game.pushMove(move);
+		assertTrue(game.wastePile.peek().isFaceUp());
 
-        assertTrue(game.wastePile.peek().isFaceUp());
+	}
 
-        game.undoMove();
+	@Test
+	public void testUnflipCard() {
+		Alahambra game = tester.getTestGame();
+		FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
+				game.wastePile);
+		move.doMove(game);
+		game.pushMove(move);
 
-        assertTrue(!game.stockPile.peek().isFaceUp());
-    }
+		assertTrue(game.wastePile.peek().isFaceUp());
+
+		game.undoMove();
+
+		assertTrue(!game.stockPile.peek().isFaceUp());
+	}
 
 }

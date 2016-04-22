@@ -53,6 +53,30 @@ public class ResetStockPileMoveTest {
 	}
 
 	@Test
+	public void testNoStocks() {
+		Alahambra game = test.getTestGame();
+		flipThroughStock(game);
+		ResetStockPileMove move = new ResetStockPileMove(game.stockPile,
+				game.wastePile);
+		move.doMove(game);
+		// Now one stock remains
+
+		flipThroughStock(game);
+		ResetStockPileMove move2 = new ResetStockPileMove(game.stockPile,
+				game.wastePile);
+		assertTrue(move2.doMove(game));
+		// Now no stock remains
+
+		flipThroughStock(game);
+		ResetStockPileMove move3 = new ResetStockPileMove(game.stockPile,
+				game.wastePile);
+
+		assertTrue(!move3.valid(game));
+		assertTrue(!move3.doMove(game));
+
+	}
+
+	@Test
 	public void testCardsFlipped() {
 		Alahambra game = test.getTestGame();
 		flipThroughStock(game);

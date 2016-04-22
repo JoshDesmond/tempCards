@@ -10,12 +10,12 @@ import ks.common.model.Card;
  * This class is in charge of dealing out the cards to the correct spots at the
  * start of a game
  */
-public class AlahambraGameStarter implements AlahambraDealer{
+public class RandomDealer implements AlahambraDealer{
 
 	Random random = new Random();
 	private Alahambra game;
 
-	public AlahambraGameStarter() {
+	public RandomDealer() {
 	}
 
 	@Override
