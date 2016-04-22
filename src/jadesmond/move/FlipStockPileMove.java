@@ -38,6 +38,7 @@ public class FlipStockPileMove extends Move {
         }
 
         Card card = stockPile.get();
+        card.setFaceUp(true);
         wastePile.add(card);
         return true;
     }
@@ -45,6 +46,7 @@ public class FlipStockPileMove extends Move {
     @Override
     public boolean undo(Solitaire game) {
         Card c = wastePile.get();
+        c.setFaceUp(false);
         stockPile.add(c);
         return true;
     }

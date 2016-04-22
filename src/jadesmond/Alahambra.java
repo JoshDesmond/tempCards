@@ -84,8 +84,8 @@ public class Alahambra extends Solitaire {
         }
 
         for (int i = 0; i < 8; i++) {
-            foundationViews[i].setMouseAdapter(
-                    new FoundationController(this, foundationViews[i]));
+            foundationViews[i].setMouseAdapter(new FoundationController(this,
+                    foundationViews[i], (i < 4)));
         }
 
         // Finally, cover the Container for any events not handled by a widget:

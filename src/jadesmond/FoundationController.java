@@ -25,6 +25,7 @@ public class FoundationController extends MouseAdapter {
         super();
         this.theGame = theGame;
         this.foundationSource = foundationSource;
+        this.isAceType = isAceType;
     }
 
     @Override

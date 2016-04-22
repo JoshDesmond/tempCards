@@ -32,7 +32,9 @@ public class AlahambraGameStarter {
         }
 
         while (!game.deck.empty()) {
-            game.stockPile.add(game.deck.get());
+            Card c = game.deck.get();
+            c.setFaceUp(false);
+            game.stockPile.add(c);
         }
     }
 

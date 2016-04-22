@@ -48,4 +48,38 @@ public class FlipStockPileMoveTest {
         FlipStockPileMove move = new FlipStockPileMove(null, null);
     }
 
+    @Test
+    public void testFlipCard() {
+        Alahambra game = tester.getTestGame();
+        FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
+                game.wastePile);
+        move.doMove(game);
+        game.pushMove(move);
+
+        assertTrue(game.wastePile.peek().isFaceUp());
+
+        FlipStockPileMove move2 = new FlipStockPileMove(game.stockPile,
+                game.wastePile);
+        move2.doMove(game);
+        game.pushMove(move2);
+
+        assertTrue(game.wastePile.peek().isFaceUp());
+
+    }
+
+    @Test
+    public void testUnflipCard() {
+        Alahambra game = tester.getTestGame();
+        FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
+                game.wastePile);
+        move.doMove(game);
+        game.pushMove(move);
+
+        assertTrue(game.wastePile.peek().isFaceUp());
+
+        game.undoMove();
+
+        assertTrue(!game.stockPile.peek().isFaceUp());
+    }
+
 }

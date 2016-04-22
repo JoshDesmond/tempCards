@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import org.junit.Test;
 
+import jadesmond.move.FlipStockPileMove;
 import ks.common.model.Card;
 import ks.common.model.Column;
 
@@ -55,6 +56,19 @@ public class AlahambraGameStarterTest {
         for (Column c : game.columns) {
             assertTrue(c.count() == 4);
         }
+
+    }
+
+    @Test
+    public void testStockFlippedOver() {
+        Alahambra game = test.getTestGame();
+        assertTrue(!game.stockPile.peek().isFaceUp());
+        FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
+                game.wastePile);
+
+        assertTrue(move.doMove(game));
+
+        assertTrue(!game.stockPile.peek().isFaceUp());
 
     }
 }
