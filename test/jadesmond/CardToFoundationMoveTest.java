@@ -9,8 +9,6 @@ import org.junit.Test;
 
 public class CardToFoundationMoveTest {
 
-	MoveTester test = new MoveTester();
-
 	@Test
 	public void testIntegeration() {
 		Alahambra game = getGame(1, 13);
@@ -83,7 +81,7 @@ public class CardToFoundationMoveTest {
 	}
 
 	private Alahambra getGame(int aceValue, int kingValue) {
-		Alahambra game = test.getTestGame();
+		Alahambra game = new MoveTester().getTestGame();
 		game.aceFoundations[0].removeAll();
 		game.aceFoundations[0].add(new Card(aceValue, 1));
 		game.kingFoundations[0].removeAll();

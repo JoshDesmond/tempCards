@@ -39,7 +39,7 @@ public abstract class CardToFoundationMove extends Move {
 	public boolean undo(Solitaire game) {
 		source.add(target.get());
 		game.updateScore(-1);
-		game.updateNumberCardsLeft(-1);
+		game.updateNumberCardsLeft(1);
 		return true;
 	}
 

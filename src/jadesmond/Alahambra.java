@@ -46,12 +46,12 @@ public class Alahambra extends Solitaire {
 	IntegerView numLeftView;
 	IntegerView stocksLeftView;
 	/**
-	 * For use with batch operations on widgets, like registering the undo
-	 * adapter.
+	 * For use with the batch operation of registering the listeners.
 	 */
 	private List<Widget> views;
 
-	private AlahambraDealer dealer;
+	/** This object is used to deal out the cards */
+	private final AlahambraDealer dealer;
 
 	/** Optional constructor you can use to change the way the game starts */
 	public Alahambra(AlahambraDealer dealer) {
@@ -63,6 +63,7 @@ public class Alahambra extends Solitaire {
 		this.dealer = dealer;
 	}
 
+	/** Creates a new Alahambra */
 	public Alahambra() {
 		super();
 		this.dealer = new RandomDealer();
@@ -90,6 +91,8 @@ public class Alahambra extends Solitaire {
 
 	private void intializeControllers() {
 		for (Widget w : views) {
+			// Even though some of the MouseAdapters change, this is nice and
+			// easy and ensures I won't miss anything.
 			w.setMouseAdapter(new SolitaireReleasedAdapter(this));
 			w.setUndoAdapter(new SolitaireUndoAdapter(this));
 			w.setMouseMotionAdapter(new SolitaireMouseMotionAdapter(this));
@@ -118,7 +121,14 @@ public class Alahambra extends Solitaire {
 	}
 
 	private void initializeView() {
+
 		views = new LinkedList<Widget>();
+		initializeCardViews();
+
+		initializeIntegerViews();
+	}
+
+	private void initializeCardViews() {
 		CardImages ci = getCardImages();
 		final int w = ci.getWidth();
 		final int h = ci.getHeight();
@@ -134,8 +144,6 @@ public class Alahambra extends Solitaire {
 		container.addWidget(wastePileView);
 		addToViewsList(wastePileView);
 
-		initializeIntegerViews();
-
 		foundationViews = new PileView[8];
 		for (int i = 0; i < 4; i++) {
 			foundationViews[i] = new PileView(aceFoundations[i]);
@@ -148,7 +156,6 @@ public class Alahambra extends Solitaire {
 			foundationViews[i].setBounds(20 + 20 * i + i * w, 20, w, h);
 			container.addWidget(foundationViews[i]);
 			addToViewsList(foundationViews[i]);
-
 		}
 
 		columnViews = new ColumnView[8];

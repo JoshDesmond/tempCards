@@ -7,17 +7,23 @@ import jadesmond.move.FlipStockPileMove;
 import ks.client.gamefactory.GameWindow;
 import ks.launcher.Main;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /** This class is for testing the full execution of a game. */
 public class AlahambraTest {
-	MoveTester test = new MoveTester();
+
 	private int score;
+	Alahambra game;
+
+	@Before
+	public void setUp() {
+		game = new Alahambra(new TestingDealer());
+		GameWindow gw = Main.generateWindow(game, 0);
+	}
 
 	@Test
 	public void testExecuteFullGame() {
-		Alahambra game = new Alahambra(new TestingDealer());
-		GameWindow gw = Main.generateWindow(game, 0);
 		score = 0;
 
 		// First forty eight moves are via the waste pile.

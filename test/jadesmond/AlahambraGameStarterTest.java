@@ -1,74 +1,73 @@
 package jadesmond;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import jadesmond.move.FlipStockPileMove;
 
 import java.util.HashSet;
 
-import org.junit.Test;
-
-import jadesmond.move.FlipStockPileMove;
 import ks.common.model.Card;
 import ks.common.model.Column;
 
+import org.junit.Before;
+import org.junit.Test;
+
 public class AlahambraGameStarterTest {
 
-    MoveTester test = new MoveTester();
+	Alahambra game;
 
-    @Test
-    public void testFoundationPiles() {
-        Alahambra game = test.getTestGame();
+	@Before
+	public void setUp() {
+		this.game = new MoveTester().getTestGame();
+	}
 
-        Card[] cards = new Card[4];
-        for (int i = 0; i < 4; i++) {
-            cards[i] = game.aceFoundations[i].peek();
-        }
+	@Test
+	public void testFoundationPiles() {
 
-        assertTrue(validateCards(cards, 1));
+		Card[] cards = new Card[4];
+		for (int i = 0; i < 4; i++) {
+			cards[i] = game.aceFoundations[i].peek();
+		}
 
-        for (int i = 0; i < 4; i++) {
-            cards[i] = game.kingFoundations[i].peek();
-        }
+		assertTrue(validateCards(cards, 1));
 
-        assertTrue(validateCards(cards, 13));
-    }
+		for (int i = 0; i < 4; i++) {
+			cards[i] = game.kingFoundations[i].peek();
+		}
 
-    /**
-     * Validates the four foundation cards, checking to see that they're all the
-     * given value and no suits are matching.
-     */
-    private boolean validateCards(Card[] cards, int value) {
-        HashSet<Integer> suits = new HashSet<Integer>();
-        for (Card c : cards) {
-            if (c.getRank() != value) {
-                return false;
-            }
+		assertTrue(validateCards(cards, 13));
+	}
 
-            suits.add(c.getSuit());
-        }
+	/**
+	 * Validates the four foundation cards, checking to see that they're all the
+	 * given value and no suits are matching.
+	 */
+	private boolean validateCards(Card[] cards, int value) {
+		HashSet<Integer> suits = new HashSet<Integer>();
+		for (Card c : cards) {
+			if (c.getRank() != value) {
+				return false;
+			}
+			suits.add(c.getSuit());
+		}
+		return (suits.size() == 4);
+	}
 
-        return (suits.size() == 4);
-    }
+	@Test
+	public void testColumnCounts() {
+		for (Column c : game.columns) {
+			assertTrue(c.count() == 4);
+		}
+	}
 
-    @Test
-    public void testColumnCounts() {
-        Alahambra game = test.getTestGame();
+	@Test
+	public void testStockFlippedOver() {
+		assertTrue(!game.stockPile.peek().isFaceUp());
+		FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
+				game.wastePile);
 
-        for (Column c : game.columns) {
-            assertTrue(c.count() == 4);
-        }
+		assertTrue(move.doMove(game));
 
-    }
+		assertTrue(!game.stockPile.peek().isFaceUp());
 
-    @Test
-    public void testStockFlippedOver() {
-        Alahambra game = test.getTestGame();
-        assertTrue(!game.stockPile.peek().isFaceUp());
-        FlipStockPileMove move = new FlipStockPileMove(game.stockPile,
-                game.wastePile);
-
-        assertTrue(move.doMove(game));
-
-        assertTrue(!game.stockPile.peek().isFaceUp());
-
-    }
+	}
 }
