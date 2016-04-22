@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ks.common.controller.SolitaireMouseMotionAdapter;
+import ks.common.controller.SolitaireReleasedAdapter;
 import ks.common.games.Solitaire;
 import ks.common.games.SolitaireUndoAdapter;
 import ks.common.model.Card;
@@ -71,6 +72,19 @@ public class Alahambra extends Solitaire {
 
         stockPileView.setMouseAdapter(
                 new StockController(this, stockPile, wastePile));
+        wastePileView
+                .setMouseAdapter(new WastePileController(this, stockPileView));
+
+        for (int i = 0; i < 8; i++) {
+            columnViews[i].setMouseAdapter(
+                    new ColumnController(this, columnViews[i]));
+        }
+
+        // Finally, cover the Container for any events not handled by a widget:
+        getContainer()
+                .setMouseMotionAdapter(new SolitaireMouseMotionAdapter(this));
+        getContainer().setMouseAdapter(new SolitaireReleasedAdapter(this));
+        getContainer().setUndoAdapter(new SolitaireUndoAdapter(this));
     }
 
     private void initializeView() {
