@@ -19,17 +19,12 @@ public class StockController extends SolitaireReleasedAdapter {
         this.wastePile = wastePile;
     }
 
-    /**
-     * Coordinate reaction to the beginning of a Drag Event. In this case, no
-     * drag is ever achieved, and we simply deal upon the pres.
-     */
     public void mousePressed(java.awt.event.MouseEvent me) {
-
         // Attempting a DealFourCardMove
         Move m = new FlipStockPileMove(stockPile, wastePile);
         if (m.doMove(theGame)) {
-            theGame.pushMove(m); // Successful DealFour Move
-            theGame.refreshWidgets(); // refresh updated widgets.
+            theGame.pushMove(m);
+            theGame.refreshWidgets();
         }
     }
 
